@@ -513,5 +513,39 @@ Starting from last directory write a single `bash` command line to count the tot
 ## Problem 4
 *E. coli* MG1655 is the standard referece strain of *E. coli*. The protein FASTA file for this strain can be downloaded from <ftp://ftp.ncbi.nlm.nih.gov/genomes/Bacteria/Escherichia_coli_K_12_substr__MG1655_uid57779/NC_000913.faa>. Using just `bash` commands can you find out what is the average length of protein in this strain? You may use as many commands as you may wish.
 
+\pagebreak
+
+# Appendix
+
+## How to resize VirtualBox disk image
+
+The `.vdi` file must be resizable for this to work. First resize the VirtualBox disk image to the required size in megabytes:
+
+```bash
+	$ VBoxManage modifyhd cb2-fedora.vdi --resize 10240
+	0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+```
+
+Once you have resized the image, login to your VM, switch to root account and then do this.
+
+```bash
+	# First create a new partition with with the free space
+	$ fdisk /dev/sda # Create a new partition of type 8e
+	
+	# Create a new physical volume
+	$ pvcreate /dev/sda3
+	
+	# Add the new volume to volume group
+	$ vgextend fedora /dev/sda3
+	
+	# Increase the size of the logical volume to occupy all the free space
+	$ lvextend -l +100%FREE /dev/fedora/root
+	
+	# Resize the filesystem
+	resize2fs /dev/fedora/root
+```
+
+
+
 
 
