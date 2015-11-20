@@ -1,5 +1,4 @@
 % CB2-101: Final Problem Set[^*]
-% Nov 20, 2015
 
 [^*]: If you can solve all of the problems in this problem set, you're ready for research in bioinformatics. Contact us. There is a job waiting for you.
 
